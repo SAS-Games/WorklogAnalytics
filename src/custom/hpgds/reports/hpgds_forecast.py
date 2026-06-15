@@ -1,7 +1,7 @@
 from collections import defaultdict
-
 from custom.hpgds.models.forecast_result import ForecastResult
-
+from custom.hpgds.constants import ACTIVITY_STUDIO_SUPPORT, SUPPORT_SUFFIX
+from custom.hpgds.utils.forecast_category_resolver import resolve_forecast_category
 from custom.hpgds.utils.studio_group_resolver import resolve_studio_group
 
 
@@ -15,35 +15,26 @@ def build_hpgds_forecast(worklogs, studio_groups_config, employee_forecast):
 
     for worklog in worklogs:
 
-        category = None
+        category = resolve_forecast_category(worklog)
 
-        if worklog.activity_group == "Project Activities":
-            category = "Internal Activities"
+        if category is None:
+            continue
 
-        elif worklog.activity_group == "Org Activities":
-            category = "Org Activities"
-
-        elif worklog.activity_group == "Studio Support":
+        if worklog.activity_group == ACTIVITY_STUDIO_SUPPORT:
 
             studio_group = resolve_studio_group(worklog.project, studio_groups_config)
 
-            if studio_group:
+            if studio_group is not None:
 
-                category = f"{studio_group} Support"
+                category = f"{studio_group}" f"{SUPPORT_SUFFIX}"
 
-        elif worklog.activity_group == "Absense":
-
-            category = "Absense"
-
-        if category is not None:
-
-            forecast[category].actual_hours += worklog.hours
+        forecast[category].actual_hours += worklog.hours
 
     # --------------------------------
     # Forecast Hours
     # --------------------------------
 
-    for employee, categories in employee_forecast.items():
+    for categories in employee_forecast.values():
 
         for category, hours in categories.items():
 
@@ -51,11 +42,9 @@ def build_hpgds_forecast(worklogs, studio_groups_config, employee_forecast):
 
             if studio_group is not None:
 
-                forecast[f"{studio_group} Support"].forecast_hours += hours
+                category = f"{studio_group}" f"{SUPPORT_SUFFIX}"
 
-            else:
-
-                forecast[category].forecast_hours += hours
+            forecast[category].forecast_hours += hours
 
     # --------------------------------
     # Totals
