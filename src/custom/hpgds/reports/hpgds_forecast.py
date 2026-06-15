@@ -5,13 +5,13 @@ from custom.hpgds.models.forecast_result import ForecastResult
 from custom.hpgds.utils.studio_group_resolver import resolve_studio_group
 
 
-def build_hpgds_forecast(worklogs, studio_groups_config, forecast_request):
+def build_hpgds_forecast(worklogs, studio_groups_config, employee_forecast):
 
-    employee_actuals = defaultdict(lambda: defaultdict(float))
+    forecast = defaultdict(ForecastResult)
 
-    # -----------------------------
-    # Build employee distributions
-    # -----------------------------
+    # --------------------------------
+    # Actual Hours
+    # --------------------------------
 
     for worklog in worklogs:
 
@@ -28,56 +28,38 @@ def build_hpgds_forecast(worklogs, studio_groups_config, forecast_request):
             studio_group = resolve_studio_group(worklog.project, studio_groups_config)
 
             if studio_group:
+
                 category = f"{studio_group} Support"
 
         elif worklog.activity_group == "Absense":
+
             category = "Absense"
 
         if category is not None:
 
-            employee_actuals[worklog.employee][category] += worklog.hours
+            forecast[category].actual_hours += worklog.hours
 
-    # -----------------------------
-    # Aggregate Forecast
-    # -----------------------------
+    # --------------------------------
+    # Forecast Hours
+    # --------------------------------
 
-    forecast = defaultdict(ForecastResult)
+    for employee, categories in employee_forecast.items():
 
-    for employee, categories in employee_actuals.items():
+        for category, hours in categories.items():
 
-        productive_hours = sum(
-            hours for category, hours in (categories.items()) if category != "Absense"
-        )
+            studio_group = resolve_studio_group(category, studio_groups_config)
 
-        if productive_hours <= 0:
-            continue
+            if studio_group is not None:
 
-        absence_days = forecast_request.absence_plan.get(employee, 0)
+                forecast[f"{studio_group} Support"].forecast_hours += hours
 
-        productive_capacity = (
-            forecast_request.remaining_working_days - absence_days
-        ) * 8
+            else:
 
-        absence_capacity = absence_days * 8
+                forecast[category].forecast_hours += hours
 
-        for category, actual_hours in categories.items():
-
-            forecast[category].actual_hours += actual_hours
-
-            if category == "Absense":
-                continue
-
-            percentage = actual_hours / productive_hours
-
-            forecast_hours = productive_capacity * percentage
-
-            forecast[category].forecast_hours += forecast_hours
-
-        forecast["Absense"].forecast_hours += absence_capacity
-
-    # -----------------------------
-    # Final Totals
-    # -----------------------------
+    # --------------------------------
+    # Totals
+    # --------------------------------
 
     for result in forecast.values():
 
