@@ -1,0 +1,47 @@
+{
+  "activity_groups": [
+    {
+      "name": "Studio Support",
+
+      "tags": [
+        "Studio_Meeting",
+        "Studio_Support"
+      ],
+
+      "components": [
+        "StudioRequest",
+        "Lokko"
+      ]
+    },
+
+    {
+      "name": "Project Activities",
+
+      "tags": [
+        "Project_Activities",
+        "Project_Activity",
+        "Internal_Meetings"
+      ],
+
+      "components": [
+        "HP_Internal",
+        "HP_Milestones",
+        "SkillUp"
+      ]
+    },
+    {
+      "name": "Org Activities",
+
+      "tags": [
+        "External_Meetings",
+        "Org_Activity"
+      ]
+    },
+    {
+      "name": "Absense",
+      "tags": [
+        "Absense"
+      ]
+    }
+  ]
+}

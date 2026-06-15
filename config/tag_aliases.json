@@ -1,0 +1,13 @@
+{
+  "aliases": {
+    "Project_Activity": "Project_Activities",
+    "Project_activities": "Project_Activities",
+
+    "Internal_Meeting": "Internal_Meetings",
+    "Internal_meeting": "Internal_Meetings",
+
+    "Organisation_Activities": "Organisation_Activities",
+    "Organisational_Activities": "Organisation_Activities",
+    "Organistation_Activity": "Organisation_Activities"
+  }
+}

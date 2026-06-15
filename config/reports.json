@@ -1,0 +1,15 @@
+{
+  "reports": [
+    {
+      "title": "Activity Summary",
+      "group_by": "activity_group",
+      "show_all_configured": true
+    },
+    {
+      "title": "Employee Activity Matrix",
+      "type": "matrix",
+      "rows": "employee",
+      "columns": "activity_group"
+    }
+  ]
+}
