@@ -1,11 +1,12 @@
 from worklog_analytics.models.validation_issue import ValidationIssue
 from worklog_analytics.models.worklog import Worklog
+from custom.hpgds.constants import ACTIVITY_STUDIO_SUPPORT
 
 
-def validate_worklog(worklog: Worklog) -> list[ValidationIssue]:
+def validate_hpgds_worklog(worklog: Worklog) -> list[ValidationIssue]:
     issues = []
 
-    if worklog.activity_group is None:
+    if worklog.activity_group == ACTIVITY_STUDIO_SUPPORT and worklog.project is None:
 
         issues.append(
             ValidationIssue(
@@ -18,7 +19,7 @@ def validate_worklog(worklog: Worklog) -> list[ValidationIssue]:
                 component=worklog.component,
                 all_components=worklog.all_components,
                 tags=worklog.tags,
-                reason="Activity Group Not Found",
+                reason="Studio Support Missing Project",
             )
         )
 

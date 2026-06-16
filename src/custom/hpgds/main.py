@@ -7,11 +7,13 @@ from custom.hpgds.reports.report_runner import (run_hpgds_reports)
 from custom.hpgds.reports.review_items_report import ( run_review_items_report)
 from custom.hpgds.excel.workbook_builder import (generate_workbook)
 from custom.hpgds.loaders.forecast_loader import (load_forecast_request)
-
+from custom.hpgds.validators.validate_hpgds_worklog import (validate_hpgds_worklog)
 
 def main():
 
     context = build_context()
+    for worklog in context.worklogs:
+        context.validation_issues.extend(validate_hpgds_worklog(worklog))
 
     studio_groups_config = load_json(Path( "src/custom/hpgds/configs/studio_groups.json"))
     forecast_config = load_json(Path("src/custom/hpgds/configs/forecast.json"))
