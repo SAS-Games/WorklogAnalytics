@@ -20,9 +20,9 @@ def write_summary(worksheet, summary, start_row=2):
         worksheet.cell(row=clear_row, column=2, value=None)
 
 
-def generate_workbook(worklogs, validation_issues, studio_groups_config, output_file):
+def generate_workbook(worklogs,validation_issues,studio_groups_config,template_file,output_file):
 
-    workbook = load_workbook("input/report_template.xlsx")
+    workbook = load_workbook(template_file)
 
     # =================================
     # Executive Summary

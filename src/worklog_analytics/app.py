@@ -5,7 +5,7 @@ from worklog_analytics.loaders.config_loader import load_json
 from worklog_analytics.models.analysis_context import AnalysisContext
 
 
-def build_context()->AnalysisContext:
+def build_context(worklog_file: Path = Path("input/timesheetsample.xls"),) -> AnalysisContext:
 
     tag_aliases = load_json(Path("config/tag_aliases.json"))
     project_aliases = load_json(Path("config/project_aliases.json"))
@@ -14,7 +14,7 @@ def build_context()->AnalysisContext:
     reports_config = load_json(Path("config/reports.json"))
 
     worklogs, validation_issues = run_analysis(
-        Path("input/timesheetsample.xls"),
+        worklog_file,
         activity_config,
         project_config,
         tag_aliases,
