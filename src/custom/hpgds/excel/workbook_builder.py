@@ -2,6 +2,7 @@ from openpyxl import load_workbook
 from custom.hpgds.reports.executive_summary import (build_executive_summary,)
 from custom.hpgds.reports.studio_support_breakdown import (build_studio_support_breakdown,)
 from custom.hpgds.reports.validation_summary import (build_validation_summary,)
+from custom.hpgds.constants import EFFORT_SUMMARY_SHEET, STUDIO_SUPPORT_SUMMARY_SHEET
 
 
 def write_summary(worksheet, summary, start_row=2):
@@ -25,19 +26,19 @@ def generate_workbook(worklogs,validation_issues,studio_groups_config,template_f
     workbook = load_workbook(template_file)
 
     # =================================
-    # Executive Summary
+    # Activity Summary
     # =================================
 
-    worksheet = workbook["Executive Summary"]
-    executive_summary = build_executive_summary(worklogs, studio_groups_config)
+    worksheet = workbook[f"{EFFORT_SUMMARY_SHEET}"]
+    activities_summary = build_executive_summary(worklogs, studio_groups_config)
 
-    write_summary(worksheet, executive_summary)
+    write_summary(worksheet, activities_summary)
 
     # =================================
     # Studio Breakdown
     # =================================
 
-    worksheet = workbook["Studio Breakdown"]
+    worksheet = workbook[f"{STUDIO_SUPPORT_SUMMARY_SHEET}"]
     studio_breakdown = build_studio_support_breakdown(worklogs, studio_groups_config)
 
     write_summary(worksheet, studio_breakdown)
