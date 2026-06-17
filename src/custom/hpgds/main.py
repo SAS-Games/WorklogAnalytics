@@ -22,30 +22,16 @@ def main():
     for worklog in context.worklogs:
         context.validation_issues.extend(validate_hpgds_worklog(worklog))
 
-
     studio_groups_config = load_json(Path("src/custom/hpgds/configs/studio_groups.json") )
     forecast_config = load_json(Path("src/custom/hpgds/configs/forecast.json"))
     forecast_request = load_forecast_request(forecast_config)
 
     run_reports(context)
 
-    run_hpgds_reports(
-        context.worklogs,
-        context.validation_issues,
-        studio_groups_config,
-        forecast_request,
-    )
-
+    run_hpgds_reports(context.worklogs, context.validation_issues, studio_groups_config, forecast_request)
     run_debug_reports(context)
     run_review_items_report(context)
-
-    generate_workbook(
-        context.worklogs,
-        context.validation_issues,
-        studio_groups_config,
-        template_file,
-        output_file,
-    )
+    generate_workbook(context.worklogs, context.validation_issues, studio_groups_config, template_file, output_file, forecast_request)
 
 
 if __name__ == "__main__":
