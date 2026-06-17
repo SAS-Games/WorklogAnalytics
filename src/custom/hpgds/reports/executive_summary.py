@@ -51,6 +51,6 @@ def build_executive_summary(worklogs, studio_groups_config) -> dict[str, float]:
         if activity == f"{ACTIVITY_STUDIO_SUPPORT}":
             studio_group = resolve_studio_group(worklog.project, studio_groups_config)
             if studio_group is not None:
-                summary[f"{studio_group} Support"] += worklog.hours
+                summary[f"{studio_group}{SUPPORT_SUFFIX}"] += worklog.hours
 
     return summary
