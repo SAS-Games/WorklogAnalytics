@@ -22,9 +22,11 @@ def main():
     for worklog in context.worklogs:
         context.validation_issues.extend(validate_hpgds_worklog(worklog))
 
-    studio_groups_config = load_json(Path("src/custom/hpgds/configs/studio_groups.json") )
-    forecast_config = load_json(Path("src/custom/hpgds/configs/forecast.json"))
-    forecast_request = load_forecast_request(forecast_config)
+    studio_groups_config = load_json(Path("src/custom/hpgds/configs/studio_groups.json"), True)
+    forecast_request = None
+    forecast_config = load_json(Path("src/custom/hpgds/configs/forecast.json"), True)
+    if forecast_config:
+        forecast_request = load_forecast_request(forecast_config)
 
     run_reports(context)
 
