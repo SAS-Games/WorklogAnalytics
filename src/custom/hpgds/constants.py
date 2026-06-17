@@ -7,6 +7,6 @@ CATEGORY_INTERNAL = "Internal Activities"
 CATEGORY_ORG = "Org Activities"
 CATEGORY_ABSENSE = "Absense"
 
-SUPPORT_SUFFIX = " Support"
+SUPPORT_SUFFIX = ""
 EFFORT_SUMMARY_SHEET = "Effort Summary"
 STUDIO_SUPPORT_SUMMARY_SHEET = "Studio Breakdown"
