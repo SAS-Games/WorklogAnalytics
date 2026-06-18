@@ -1,5 +1,5 @@
+from custom.hpgds.constants import ACTIVITY_STUDIO_SUPPORT
 def build_studio_support_breakdown(worklogs,studio_groups_config) -> dict[str, float]:
-
     summary = {}
 
     for projects in (studio_groups_config["studio_groups"].values()):
@@ -8,8 +8,7 @@ def build_studio_support_breakdown(worklogs,studio_groups_config) -> dict[str, f
 
 
     for worklog in worklogs:
-
-        if (worklog.activity_group!= "Studio Support"):
+        if (worklog.activity_group!= f"{ACTIVITY_STUDIO_SUPPORT}"):
             continue
 
         if worklog.project is None:

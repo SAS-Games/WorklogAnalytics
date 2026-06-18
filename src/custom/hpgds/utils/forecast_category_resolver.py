@@ -1,26 +1,17 @@
-from custom.hpgds.constants import (
-    ACTIVITY_STUDIO_SUPPORT,
-    ACTIVITY_PROJECT,
-    ACTIVITY_ORG,
-    ACTIVITY_ABSENSE,
-    CATEGORY_INTERNAL,
-    CATEGORY_ORG,
-    CATEGORY_ABSENSE,
-)
-
+import custom.hpgds.constants as constants
 
 def resolve_forecast_category(worklog):
 
-    if worklog.activity_group == ACTIVITY_STUDIO_SUPPORT:
+    if worklog.activity_group == constants.ACTIVITY_STUDIO_SUPPORT:
         return worklog.project
 
-    if worklog.activity_group == ACTIVITY_PROJECT:
-        return CATEGORY_INTERNAL
+    if worklog.activity_group == constants.ACTIVITY_PROJECT:
+        return constants.CATEGORY_INTERNAL
 
-    if worklog.activity_group == ACTIVITY_ORG:
-        return CATEGORY_ORG
+    if worklog.activity_group == constants.ACTIVITY_ORG:
+        return constants.CATEGORY_ORG
 
-    if worklog.activity_group == ACTIVITY_ABSENSE:
-        return CATEGORY_ABSENSE
+    if worklog.activity_group == constants.ACTIVITY_ABSENSE:
+        return constants.CATEGORY_ABSENSE
 
     return None

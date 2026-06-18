@@ -5,7 +5,7 @@
             "name": "Worklog Analytics",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/worklog_analytics/main.py",
+            "program": "${workspaceFolder}/src/custom/hpgds/main.py",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal"
         }

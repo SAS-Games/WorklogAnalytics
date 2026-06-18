@@ -1,10 +1,5 @@
 from collections import defaultdict
-
-from custom.hpgds.constants import (
-    CATEGORY_INTERNAL,
-    CATEGORY_ORG,
-    CATEGORY_ABSENSE,
-)
+import custom.hpgds.constants as constants
 
 
 def build_forecast_studio_breakdown(employee_forecast, actual_breakdown):
@@ -16,9 +11,9 @@ def build_forecast_studio_breakdown(employee_forecast, actual_breakdown):
         for category, hours in categories.items():
 
             if category in (
-                CATEGORY_INTERNAL,
-                CATEGORY_ORG,
-                CATEGORY_ABSENSE,
+                constants.CATEGORY_INTERNAL,
+                constants.CATEGORY_ORG,
+                constants.CATEGORY_ABSENSE,
             ):
                 continue
 

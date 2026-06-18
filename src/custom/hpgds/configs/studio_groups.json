@@ -1,18 +1,18 @@
 {
   "studio_groups": {
     "IHP": [
-      "Meteora",
-      "Requital",
-      "Suri",
-      "Mukti",
-      "Lokko",
-      "Bloody_Boots"
+      "BBG",
+      "HC",
+      "TM",
+      "UD",
+      "AM",
+      "WL"
     ],
     "MHP": [
-      "Enci's Solution",
-      "Red Bandits",
-      "A Cat's Manor",
-      "Perfect Run"
+      "TA",
+      "DE",
+      "HDC",
+      "LS"
     ]
   }
 }
