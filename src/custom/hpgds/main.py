@@ -9,11 +9,20 @@ from custom.hpgds.workbook.workbook_builder import generate_workbook
 from custom.hpgds.loaders.forecast_loader import load_forecast_request
 from custom.hpgds.validators.validate_hpgds_worklog import validate_hpgds_worklog
 from custom.hpgds.utils.file_picker import pick_excel_file, pick_output_file
+from worklog_analytics.sources.source_selector import (select_source,WorklogSourceType)
+from worklog_analytics.sources.date_range_picker import pick_date_range
+from worklog_analytics.sources.jira_downloader import download_jira_timesheet
 
 
 def main():
+    source = select_source()
 
-    worklog_file = pick_excel_file("Select Worklog Excel File")
+    if source == WorklogSourceType.EXCEL:
+        worklog_file = pick_excel_file("Select Worklog Excel File")
+    else:
+        date_range = pick_date_range()
+        worklog_file = download_jira_timesheet(date_range)
+    
     template_file = pick_excel_file("Select Report Template")
     output_file = pick_output_file()
 
