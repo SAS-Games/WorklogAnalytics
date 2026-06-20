@@ -5,20 +5,16 @@ from worklog_analytics.parsers.tag_parser import extract_tags
 def row_to_worklog( row,tag_alias_config: dict) -> Worklog:
 
     description = str(row["Work Description"])
-
+    activity_name = str(row["Activity Name"])
+    
     return Worklog(
         issue_key=row["Issue Key"],
         employee=row["Full name"],
         work_date=row["Work date"],
         hours=float(row["Hours"]),
 
-        activity_name=str(
-            row["Activity Name"]
-        ),
-
-        component=str(
-            row["Component"]
-        ),
+        activity_name=str(row["Activity Name"]),
+        component=str(row["Component"]),
 
         all_components=[
             c.strip()
@@ -30,8 +26,6 @@ def row_to_worklog( row,tag_alias_config: dict) -> Worklog:
 
         work_description=description,
 
-        tags=extract_tags(
-            description,
-            tag_alias_config
-        )
+        tags=extract_tags(description, tag_alias_config),
+        summary_tags=extract_tags(activity_name, tag_alias_config)
     )

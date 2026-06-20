@@ -16,7 +16,7 @@ def run_analysis(excel_path, activity_config, project_config, tag_aliases, proje
     ]
 
     for worklog in worklogs:
-        activity_group, source = (resolve_activity_group(worklog,activity_config))
+        activity_group, source = (resolve_activity_group(worklog, activity_config))
 
         worklog.activity_group = activity_group
         worklog.classification_source = source

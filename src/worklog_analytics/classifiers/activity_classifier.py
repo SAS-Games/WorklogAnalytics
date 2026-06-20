@@ -11,6 +11,13 @@ def resolve_activity_group( worklog: Worklog,config: dict) -> tuple[str | None, 
 
         if any(tag in worklog.tags for tag in tags):
             return (group["name"],"Tag")
+        
+    # Summary Tags
+    for group in groups:
+        tags = group.get("tags", [])
+
+        if any(tag in worklog.summary_tags for tag in tags):
+            return (group["name"], "SummaryTag")
 
     # All Components
     for group in groups:

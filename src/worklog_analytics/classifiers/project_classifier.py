@@ -17,6 +17,13 @@ def resolve_project(worklog: Worklog, project_config: dict, project_aliases: dic
 
         if normalized in projects:
             return normalized
+        
+    # Summary Tags
+    for tag in worklog.summary_tags:
+        normalized = normalize_project(tag, aliases)
+
+        if normalized in projects:
+            return normalized
 
     # All Components
     for component in worklog.all_components:

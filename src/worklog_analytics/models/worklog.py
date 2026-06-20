@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 
 
@@ -16,7 +16,8 @@ class Worklog:
 
     work_description: str
 
-    tags: list[str] | None = None
+    tags: list[str] = field(default_factory=list)
+    summary_tags: list[str] = field(default_factory=list)
 
     activity_group: str | None = None
     project: str | None = None
