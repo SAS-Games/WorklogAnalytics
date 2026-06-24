@@ -2,14 +2,51 @@
   "reports": [
     {
       "title": "Activity Summary",
-      "group_by": "activity_group",
-      "show_all_configured": true
+      "worksheet_name": "Activity Summary",
+      "group_by": "activity_group"
     },
     {
       "title": "Employee Activity Matrix",
+      "worksheet_name": "Employee Activity Matrix",
       "type": "matrix",
       "rows": "employee",
-      "columns": "activity_group"
+      "columns": "activity_group",
+      "row_header": "Employee",
+      "show_all_configured": true
+    },
+    {
+      "title": "Employee Summary",
+      "worksheet_name": "Employee Summary",
+      "group_by": "employee"
+    },
+    {
+      "title": "Component Summary",
+      "worksheet_name": "Component Summary",
+      "group_by": "component"
+    },
+    {
+      "title": "Studio Support Employees",
+      "worksheet_name": "Studio Support Employees",
+      "group_by": "employee",
+      "filters": {
+        "activity_group": [
+          "Studio Support"
+        ]
+      }
+    },
+    {
+      "title": "Project Activity Matrix",
+      "worksheet_name": "Project Activity Matrix",
+      "type": "matrix",
+      "rows": "employee",
+      "columns": "activity_group",
+      "row_header": "Employee",
+      "filters": {
+        "activity_group": [
+          "Project Activities"
+        ]
+      },
+      "show_all_configured": false
     }
   ]
 }

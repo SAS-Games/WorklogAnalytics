@@ -1,4 +1,4 @@
-def print_matrix(title: str, matrix: dict, columns: list[str] | None = None):
+def print_matrix(title: str, matrix: dict, columns: list[str] | None = None, row_header: str = "Row"):
     print(f"\n=========== {title} ===========\n")
 
     if columns is None:
@@ -9,7 +9,7 @@ def print_matrix(title: str, matrix: dict, columns: list[str] | None = None):
 
         columns = sorted(discovered_columns)
 
-    print("".ljust(30) + "".join(c.ljust(20) for c in columns))
+    print(row_header.ljust(30)+ "".join(c.ljust(20) for c in columns))
 
     for row in sorted(matrix.keys()):
         line = row.ljust(30)
