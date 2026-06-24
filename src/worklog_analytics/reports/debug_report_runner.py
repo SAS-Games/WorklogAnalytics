@@ -7,7 +7,7 @@ def run_debug_reports(context:AnalysisContext):
 
     # Sample Worklogs
     print("\n=========== FIRST 20 WORKLOGS ===========\n")
-    for worklog in worklogs[:20]:
+    for worklog in worklogs:
 
         print(
             f"{worklog.issue_key} | "
