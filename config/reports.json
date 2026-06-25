@@ -47,6 +47,19 @@
         ]
       },
       "show_all_configured": false
+    },
+    {
+      "title": "Employee Effort by Studio",
+      "worksheet_name": "Employee Studio Effort",
+      "type": "matrix",
+      "rows": "project",
+      "columns": "employee",
+      "row_header": "Studio",
+      "filters": {
+        "activity_group": [
+          "Studio Support"
+        ]
+      }
     }
   ]
 }
