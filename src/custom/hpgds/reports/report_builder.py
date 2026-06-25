@@ -1,4 +1,4 @@
-from worklog_analytics.reports.models import SummaryReport
+from worklog_analytics.reports.models import SummaryReport, MatrixReport
 from custom.hpgds.reports.executive_summary import build_executive_summary
 from custom.hpgds.reports.studio_support_breakdown import build_studio_support_breakdown
 from custom.hpgds.reports.validation_summary import build_validation_summary
@@ -7,6 +7,7 @@ from custom.hpgds.reports.forecast_summary import build_forecast_summary
 from custom.hpgds.reports.final_summary import build_final_summary
 from custom.hpgds.reports.forecast_studio_breakdown import build_forecast_studio_breakdown
 from custom.hpgds.reports.final_studio_breakdown import build_final_studio_breakdown
+from custom.hpgds.reports.employee_effort_by_studio import build_employee_effort_by_studio
 from custom.hpgds.calculators.employee_forecast_builder import build_employee_forecast
 
 
@@ -46,6 +47,22 @@ def build_hpgds_reports(
             title="STUDIO SUPPORT BREAKDOWN",
             worksheet_name="Studio Support Summary",
             data=studio_breakdown,
+        )
+    )
+
+    # Employee Effort by Studio
+
+    employee_effort_by_studio = build_employee_effort_by_studio(
+        worklogs,
+        studio_groups_config,
+    )
+
+    reports.append(
+        MatrixReport(
+            title="EMPLOYEE EFFORT BY STUDIO",
+            worksheet_name="Employee Studio Effort",
+            data=employee_effort_by_studio,
+            row_header="Studio",
         )
     )
 
